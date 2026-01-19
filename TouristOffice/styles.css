@@ -1,0 +1,848 @@
+/* CSS Variables & Reset */
+:root {
+    --font-display: 'Helvética Now Display', 'Helvetica', 'Arial', sans-serif;
+    --font-serif: 'Playfair Now Display', 'Playfair Display', serif;
+    --font-creative: 'ZT Nature', 'Arial Black', sans-serif;
+    --color-white: #ffffff;
+    --color-glass: rgba(26, 26, 26, 0.6);
+    --color-glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-display);
+    background-color: #000;
+    overflow-x: hidden;
+}
+
+/* Nav Menu */
+.main-header {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    z-index: 100;
+    display: flex;
+    justify-content: flex-end;
+    padding: 2rem 4rem;
+
+    .nav-menu {
+        background: var(--color-glass);
+        backdrop-filter: blur(10px);
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        border: 1px solid var(--color-glass-border);
+
+        ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+
+            li {
+                a {
+                    color: var(--color-white);
+                    text-decoration: none;
+                    font-family: var(--font-display);
+                    font-size: 0.9rem;
+                    font-weight: 500;
+                    text-transform: capitalize;
+                    opacity: 0.8;
+                    transition: opacity 0.3s ease;
+
+                    &:hover,
+                    &.active {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    /* Layer 1: Background Sky/Base */
+    .hero-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 1;
+    }
+
+    /* Layer 2: Text Title */
+    .hero-title {
+        position: absolute;
+        top: 9%;
+        /* Moved up */
+        z-index: 2;
+        font-family: var(--font-creative);
+        font-size: 15vw;
+        /* Made smaller */
+        color: var(--color-white);
+        line-height: 1;
+        letter-spacing: -0.02em;
+        text-align: center;
+        width: 100%;
+        pointer-events: none;
+        /* Let clicks pass through */
+        text-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Layer 3: Foreground Buildings */
+    .hero-fg {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        /* Changed from top:0 to bottom:0 to anchor it */
+        width: 100%;
+        height: auto;
+        min-height: 100%;
+        /* Ensure it covers height */
+        object-fit: cover;
+        object-position: bottom;
+        z-index: 3;
+    }
+
+    /* Discover Button Area */
+    .hero-content {
+        position: absolute;
+        bottom: 5rem;
+        z-index: 4;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .btn-discover {
+        color: var(--color-white);
+        text-decoration: none;
+        padding: 1rem 2.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 50px;
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(5px);
+        font-family: var(--font-display);
+        text-transform: capitalize;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--color-white);
+        }
+    }
+}
+
+/* Top Destinations Section */
+.top-destinations {
+    background-color: var(--color-white);
+    /* Changed to white */
+    padding: 5rem 0;
+    color: #000;
+    /* Dark text for the section */
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 4rem;
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            font-weight: 700;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 0.9;
+            /* Reduced line height to bring TOP closer */
+            color: #000;
+
+            .subtitle {
+                font-family: var(--font-serif);
+                font-weight: 400;
+                font-style: italic;
+                font-size: 3rem;
+                color: #333;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                padding-top: 0.5rem;
+                /* Slight spacing */
+
+                /* The line before Destinations */
+                &::before {
+                    content: "";
+                    display: block;
+                    width: 40px;
+                    /* Longer line */
+                    height: 2px;
+                    background-color: #333;
+                    margin-top: 5px;
+                    /* Visual alignment */
+                }
+            }
+        }
+    }
+
+    .destinations-scroll {
+        display: flex;
+        overflow-x: auto;
+        gap: 6rem;
+        /* Separated much more */
+        padding: 0 4rem 4rem 4rem;
+        /* Added bottom padding */
+        scroll-snap-type: x mandatory;
+        justify-content: center;
+
+        /* Hide scrollbar */
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+
+        .destination-card {
+            flex: 0 0 400px;
+            height: 250px;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            scroll-snap-align: center;
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            color: white;
+
+            &:hover {
+                transform: translateY(-10px);
+
+                .card-bg {
+                    transform: scale(1.1);
+                }
+            }
+
+            .card-bg {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.5s ease;
+            }
+
+            .card-overlay {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                /* Gradient covers full card for better text contrast if centered */
+                background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+                z-index: 1;
+            }
+
+            .card-content {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                /* Full height to allow centering if needed, or stick to bottom */
+                padding: 1.5rem;
+                z-index: 2;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                /* Keep text at bottom as per photo */
+                align-items: center;
+                /* Horizontally center text */
+                text-align: center;
+
+                h3 {
+                    font-family: var(--font-display);
+                    font-size: 2rem;
+                    margin-bottom: 0.2rem;
+                }
+
+                p {
+                    font-family: var(--font-display);
+                    font-size: 1rem;
+                    color: #ccc;
+                    margin-bottom: 1.5rem;
+                }
+
+                .btn-explore {
+                    display: inline-block;
+                    padding: 0.5rem 2rem;
+                    border: 1px solid rgba(255, 255, 255, 0.4);
+                    border-radius: 50px;
+                    color: var(--color-white);
+                    text-decoration: none;
+                    font-size: 0.8rem;
+                    transition: all 0.3s ease;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+
+                    &:hover {
+                        background: var(--color-white);
+                        color: #000;
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+/* Welcome Section */
+/* Welcome Section */
+.welcome-section {
+    background-color: var(--color-white);
+    padding: 8rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+
+    .welcome-container {
+        width: 85%;
+        max-width: 2000px;
+        /* Increased max-width to accommodate large gap */
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30rem;
+        /* Massive gap as requested */
+    }
+
+    .welcome-text {
+        flex: 1;
+        max-width: 600px;
+        min-width: 550px;
+        /* Slightly increased min-width for larger text */
+        flex-shrink: 0;
+        /* Ensure text doesn't shrink */
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 7rem;
+            font-weight: 700;
+            line-height: 0.9;
+            margin-bottom: 2rem;
+            color: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+            .title-second-line {
+                display: flex;
+                align-items: baseline;
+                gap: 1.5rem;
+                /* Gap between 'to' and 'Spain' */
+                margin-top: 0.5rem;
+            }
+
+            .italic-text {
+                font-family: var(--font-serif);
+                font-size: 6.5rem;
+                /* Slightly smaller or optically balanced */
+                font-weight: 400;
+                font-style: italic;
+            }
+
+            .highlight-text {
+                font-family: var(--font-display);
+                font-weight: 700;
+                /* Inherits size */
+            }
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            /* Increased from 1.1rem */
+            font-weight: 400;
+            color: #555;
+            margin-bottom: 3rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        p {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            /* Increased from 1.1rem */
+            color: #666;
+            line-height: 1.6;
+        }
+    }
+
+    .welcome-image {
+        flex: 1.2;
+        /* Give more space to image */
+        display: flex;
+        justify-content: flex-end;
+        flex-shrink: 0;
+        /* Prevent image from shrinking */
+
+        img {
+            max-width: none;
+            /* Allow it to grow */
+            width: 140%;
+            /* Slightly larger */
+            /* Make it bigger than container */
+            margin-right: -20%;
+            /* Offset to balance */
+            height: auto;
+            object-fit: contain;
+            filter: none;
+            /* Remove drop shadow as requested */
+        }
+    }
+}
+
+
+/* Our Roots Section */
+.roots-section {
+    background-color: #FDFBF7;
+    padding: 10rem 0 15rem 0;
+    /* Significant vertical spacing */
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+.roots-header {
+    text-align: left;
+    margin-bottom: 8rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.roots-subtitle {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin-bottom: -1rem;
+    /* Slight overlap */
+    margin-left: 5px;
+    z-index: 10;
+    color: #000;
+}
+
+.roots-title {
+    font-family: var(--font-display);
+    font-size: 8rem;
+    font-weight: 700;
+    line-height: 1;
+    margin: 0;
+    letter-spacing: -2px;
+}
+
+.timeline-container {
+    width: 85%;
+    max-width: 1600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.timeline-block {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    gap: 8rem;
+    position: relative;
+    z-index: 2;
+}
+
+/* 
+   HTML is already alternating: 
+   Block 1: Text - Image
+   Block 2: Image - Text
+   Block 3: Text - Image
+   So we do NOT need row-reverse.
+*/
+.timeline-block.reverse {
+    flex-direction: row;
+}
+
+.timeline-content {
+    flex: 1;
+    max-width: 500px;
+    padding-top: 3rem;
+}
+
+.timeline-content h3 {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: #000;
+    line-height: 1.2;
+}
+
+.timeline-content p {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    line-height: 1.7;
+    color: #444;
+}
+
+.timeline-content.text-left {
+    text-align: left;
+}
+
+.timeline-content.text-right {
+    text-align: right;
+}
+
+.timeline-image-wrapper {
+    flex: 1.2;
+    max-width: 700px;
+    height: 450px;
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: none;
+    /* Cleaner look */
+}
+
+.timeline-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.timeline-image-wrapper:hover img {
+    transform: scale(1.03);
+}
+
+/* Connector Lines */
+.connector-line-1,
+.connector-line-2 {
+    width: 100%;
+    height: 200px;
+    /* Spacer height */
+    position: relative;
+    z-index: 1;
+    margin: -1px 0;
+    /* Avoid gaps */
+}
+
+.connector-line-1 svg,
+.connector-line-2 svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    display: block;
+}
+
+/* 
+  Stepped Connector 1: Right Image -> Left Image 
+  Start: Top-Right (approx 75%), End: Bottom-Left (approx 25%)
+  Path: Down -> Left -> Down
+*/
+.connector-line-1 path {
+    stroke: #000;
+    stroke-width: 1;
+    fill: none;
+    d: path("M 78 0 V 50 H 22 V 100");
+}
+
+/* 
+  Stepped Connector 2: Left Image -> Right Image
+  Start: Top-Left (approx 25%), End: Bottom-Right (approx 75%)
+  Path: Down -> Right -> Down
+*/
+.connector-line-2 path {
+    stroke: #000;
+    stroke-width: 1;
+    fill: none;
+    d: path("M 22 0 V 50 H 78 V 100");
+}
+
+/* 
+  Mobile Responsive 
+*/
+@media (max-width: 1024px) {
+    .timeline-block {
+        gap: 4rem;
+    }
+
+    .roots-title {
+        font-size: 5rem;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .timeline-block,
+    .timeline-block.reverse {
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 2rem;
+        margin-bottom: 6rem;
+    }
+
+    .timeline-content.text-right {
+        text-align: left;
+    }
+
+    .connector-line-1,
+    .connector-line-2 {
+        display: none;
+    }
+
+    .timeline-image-wrapper {
+        width: 100%;
+        height: 300px;
+    }
+
+    .roots-subtitle {
+        margin-left: 0;
+        margin-bottom: -1rem;
+        text-align: center;
+    }
+}
+
+/* Timeless Spain Section */
+.timeless-section {
+    background-color: var(--color-white);
+    padding: 8rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timeless-header {
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.timeless-header h2 {
+    font-family: var(--font-display);
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #000;
+}
+
+.timeless-header p {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: #666;
+    font-weight: 400;
+}
+
+.timeless-timeline {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 95%;
+    /* Wider container */
+    max-width: 1800px;
+    gap: 6rem;
+    /* Increased gap */
+}
+
+/* Horizontal Connector Line */
+.timeless-line {
+    position: absolute;
+    top: 30%;
+    /* Approximate vertical center of images */
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #000;
+    z-index: 1;
+    transform: translateY(-50%);
+}
+
+.timeless-item {
+    position: relative;
+    z-index: 2;
+    /* Sit above the line */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: transparent;
+}
+
+.timeless-img-wrapper {
+    width: 100%;
+    aspect-ratio: 16/10;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    background-color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.timeless-img-wrapper:hover {
+    transform: translateY(-10px);
+}
+
+.timeless-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.timeless-item h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #000;
+}
+
+.timeless-item p {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.4;
+    max-width: 90%;
+}
+
+/* Mobile Responsive */
+@media (max-width: 1024px) {
+    .timeless-timeline {
+        flex-direction: column;
+        align-items: center;
+        gap: 4rem;
+    }
+
+    .timeless-line {
+        width: 2px;
+        height: 100%;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .timeless-item {
+        width: 80%;
+        max-width: 500px;
+    }
+
+    .timeless-header h2 {
+        font-size: 3rem;
+    }
+}
+
+/* Gastronomy Section */
+.gastronomy-section {
+    padding: 10rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-white);
+    overflow: hidden;
+}
+
+.gastronomy-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.gastronomy-subtitle {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #000;
+}
+
+.gastronomy-display {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+
+.gastronomy-title {
+    font-family: var(--font-display);
+    font-size: 16vw;
+    /* Larger title */
+    font-weight: 900;
+    color: #000;
+    letter-spacing: -0.02em;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+    line-height: 1;
+}
+
+.gastronomy-image-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    /* Sits on top of text */
+    width: 35vw;
+    /* Much larger image */
+    /* Removed small max-width, set a very large one */
+    max-width: 900px;
+    min-width: 300px;
+}
+
+.paella-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    /* Optional: drop shadow for depth */
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+}
+
+.gastronomy-description {
+    text-align: center;
+    max-width: 800px;
+    padding: 0 2rem;
+}
+
+.gastronomy-description p {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .gastronomy-title {
+        font-size: 18vw;
+    }
+
+    .gastronomy-image-container {
+        width: 45vw;
+    }
+}
